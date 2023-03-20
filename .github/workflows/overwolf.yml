@@ -23,5 +23,10 @@ jobs:
           node-version: 18
           cache: 'pnpm'
       - run: pnpm install
-      - run: pnpm build
-      - run: pnpm release
+      - name: Build Overwolf app
+        run: pnpm build
+      - name: Release Overwolf app
+        env:
+          OW_CLI_EMAIL: ${{ secrets.OW_CLI_EMAIL }}
+          OW_CLI_API_KEY: ${{ secrets.OW_CLI_API_KEY }}
+        run: pnpm release
