@@ -5,10 +5,12 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && node copy-statics.mjs",
-    "preview": "vite preview"
+    "build": "tsc && vite build && node copy-statics.mjs && ow opk pack dist -o dist/hogwarts.opk",
+    "preview": "vite preview",
+    "release": "ow opk upload dist/hogwarts.opk"
   },
   "devDependencies": {
+    "@overwolf/ow-cli": "0.0.5-0",
     "@overwolf/types": "3.22.2",
     "typescript": "4.9.3",
     "vite": "4.1.4"
