@@ -5,6 +5,10 @@ on:
     paths:
       - 'packages/overwolf/manifest.json'
 
+defaults:
+  run:
+    working-directory: ./packages/overwolf
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -13,7 +17,6 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      - working-directory: ./packages/overwolf
       - run: npm ci
       - run: npm build
       - run: npm release
