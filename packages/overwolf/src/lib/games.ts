@@ -19,3 +19,18 @@ export function listenToGameInfo(
     callback(result);
   });
 }
+
+export function listenToOverlayEnablement(
+  gameId: number,
+  callback: (enabled: boolean) => void,
+) {
+  overwolf.settings.games.onOverlayEnablementChanged.addListener((event) => {
+    if (event.gameId === gameId) {
+      callback(event.enabled);
+    }
+  });
+
+  overwolf.settings.games.getOverlayEnabled(gameId, (event) => {
+    callback(event.enabled);
+  });
+}

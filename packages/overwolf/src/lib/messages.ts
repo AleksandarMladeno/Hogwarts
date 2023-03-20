@@ -1,5 +1,5 @@
 import { HOGWARTS_LEGACY_CLASS_ID } from './config';
-import { listenToGameInfo } from './games';
+import { listenToGameInfo, listenToOverlayEnablement } from './games';
 import { listenToHotkeyBinding } from './hotkeys';
 import { listenToSavegamesFolder } from './io';
 import type { HLHook } from './plugins';
@@ -22,6 +22,7 @@ export type MESSAGE_STATUS = {
     lastUpdate: string;
   } | null;
   overlay: boolean;
+  overwolfOverlayDisabled: boolean;
 };
 
 const status: MESSAGE_STATUS = {
@@ -29,6 +30,7 @@ const status: MESSAGE_STATUS = {
   toggleAppHotkeyBinding: '',
   savegame: null,
   overlay: true,
+  overwolfOverlayDisabled: false,
 };
 
 export type MESSAGE_REALTIME = {
@@ -81,6 +83,11 @@ export async function communicate(
       status.toggleAppHotkeyBinding = binding;
       postMessage(status, '*');
     });
+
+    listenToOverlayEnablement(HOGWARTS_LEGACY_CLASS_ID, (enabled) => {
+      status.overwolfOverlayDisabled = !enabled;
+      postMessage(status, '*');
+    });
   }
 
   function listToAuthWindowClose(
@@ -119,6 +126,9 @@ export async function communicate(
         break;
       case 'hotkey_binding':
         location.href = `overwolf://settings/games-overlay?hotkey=toggle_app&gameId=${HOGWARTS_LEGACY_CLASS_ID}`;
+        break;
+      case 'overwolf_settings':
+        location.href = `overwolf://store/game-settings/game-id/${HOGWARTS_LEGACY_CLASS_ID}`;
         break;
       case 'href':
         if ('href' in data && typeof data.href === 'string') {

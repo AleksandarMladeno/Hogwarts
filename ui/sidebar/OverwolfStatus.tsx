@@ -25,6 +25,7 @@ export type MESSAGE_STATUS = {
     lastUpdate: string;
   } | null;
   overlay: boolean;
+  overwolfOverlayDisabled: boolean;
 };
 
 export type MESSAGE_REALTIME = {
@@ -169,6 +170,21 @@ export default function OverwolfStatus({
           disabled={!realtime?.position}
           translations={translations}
         />
+        {status?.overwolfOverlayDisabled && (
+          <div className="text-md">
+            <span className="text-orange-500 uppercase">Game is disabled!</span>
+            <p className="text-sm">
+              Open the{' '}
+              <button
+                className="text-brand-400 hover:underline"
+                onClick={() => postMessage({ type: 'overwolf_settings' })}
+              >
+                Overwolf settings
+              </button>{' '}
+              and activate Hogwarts Legacy.
+            </p>
+          </div>
+        )}
       </SidebarSection>
       <SidebarSection
         title={translations.latestSavegame}
