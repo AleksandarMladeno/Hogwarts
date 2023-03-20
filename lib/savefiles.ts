@@ -118,13 +118,22 @@ export function extractMapLocationData(db: Database) {
     value[0].startsWith('SPHINXPUZZLE'),
   );
   const demiguiseStatuesOverland = data.filter((value) =>
-    value[0].includes('_DEMIGUISE_'),
+    value[0].startsWith('KO_DEMIGUISE'),
+  );
+  const enemies = data.filter(
+    (value) => value[0].startsWith('INT_KILL') || value[0].startsWith('KL_'),
+  );
+  const astronomyAltars = data.filter((value) =>
+    value[0].includes('KO_ASTRONOMY'),
   );
 
   if (process.env.NODE_ENV === 'development') {
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     window.data = data;
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
+    window.db = db;
   }
   return {
     fastTravels: {
@@ -159,6 +168,18 @@ export function extractMapLocationData(db: Database) {
         .map((value) => value[0]),
       max: demiguiseStatuesOverland.length,
     },
+    enemies: {
+      values: enemies
+        .filter((value) => value[1] !== 3)
+        .map((value) => value[0]),
+      max: enemies.length,
+    },
+    astronomyAltars: {
+      values: astronomyAltars
+        .filter((value) => value[1] !== 3)
+        .map((value) => value[0]),
+      max: astronomyAltars.length,
+    },
   };
 }
 
@@ -184,6 +205,14 @@ export type MapLocations = {
     max: number;
   };
   demiguiseStatues: {
+    values: string[];
+    max: number;
+  };
+  enemies: {
+    values: string[];
+    max: number;
+  };
+  astronomyAltars: {
     values: string[];
     max: number;
   };

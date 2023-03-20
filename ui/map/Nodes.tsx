@@ -55,6 +55,12 @@ export default function Nodes({ lang }: { lang: string }) {
     if (node.type === 'demiguise') {
       return player.locations.demiguiseStatues.values.includes(id);
     }
+    if (node.type === 'enemy') {
+      return player.locations.enemies.values.includes(id);
+    }
+    if (node.type === 'astronomy') {
+      return player.locations.astronomyAltars.values.includes(id);
+    }
     return false;
   }
   const visibleNodes = nodes.filter((node) => {

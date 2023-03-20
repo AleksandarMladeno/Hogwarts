@@ -110,6 +110,18 @@ export const nodeTypes: NodeType[] = [
     icon: '/assets/icons/demiguise.webp',
     discoveredIcon: '/assets/icons/demiguise_discovered.webp',
   },
+  {
+    value: 'astronomy',
+    title: 'Astronomy Altar',
+    icon: '/assets/icons/astronomy.webp',
+    discoveredIcon: '/assets/icons/astronomy_discovered.webp',
+  },
+  {
+    value: 'enemy',
+    title: 'Enemy',
+    icon: '/assets/icons/enemy.webp',
+    discoveredIcon: '/assets/icons/enemy_discovered.webp',
+  },
 ];
 
 export const getNodeType = (value: string) =>

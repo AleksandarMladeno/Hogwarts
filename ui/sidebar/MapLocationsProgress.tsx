@@ -12,6 +12,13 @@ export default function MapLocationsProgress({
     <>
       <h5 className="font-semibold">Progress</h5>
       <p>
+        Astronomy Altars:{' '}
+        <span className="text-discovered">
+          {mapLocations.astronomyAltars.values.length}
+        </span>
+        /{mapLocations.astronomyAltars.max}
+      </p>
+      <p>
         {translations.chests}:{' '}
         <span className="text-discovered">
           {mapLocations.chests.values.length}
@@ -31,6 +38,13 @@ export default function MapLocationsProgress({
           {mapLocations.demiguiseStatues.values.length}
         </span>
         /{mapLocations.demiguiseStatues.max}
+      </p>
+      <p>
+        Enemies (Work in progress):{' '}
+        <span className="text-discovered">
+          {mapLocations.enemies.values.length}
+        </span>
+        /{mapLocations.enemies.max}
       </p>
       <p>
         Field Guide Pages:{' '}
