@@ -5,7 +5,7 @@ export type NodeType = {
   discoveredIcon?: string;
 };
 
-const unknown: NodeType = {
+export const unknown: NodeType = {
   value: 'unknown',
   title: 'Unknown',
   icon: '/assets/icons/unknown.webp',

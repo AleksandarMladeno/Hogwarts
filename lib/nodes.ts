@@ -1,6 +1,7 @@
 import type { Database } from './database.types';
 import { getLocales } from './locales';
 import { getLevelByZ } from './map';
+import type { NodeType } from './node-types';
 import { getNodeType } from './node-types';
 import supabase from './supabase-browser';
 
@@ -74,9 +75,5 @@ export type Node = Database['public']['Tables']['nodes']['Row'] & {
   description: string | null;
   level: number | null;
   titleId: string | null;
-  nodeType: {
-    value: string;
-    title: string;
-    icon: string;
-  };
+  nodeType: NodeType;
 };

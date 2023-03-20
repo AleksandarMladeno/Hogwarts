@@ -1,4 +1,5 @@
 import type { Database } from 'sql.js';
+import type { Node } from './nodes';
 
 export function bodyToFile(body: string, filename: string) {
   const blob = new Blob([body], { type: 'text/plain' });
@@ -94,14 +95,39 @@ export function extractPlayer(db: Database): SavefilePlayer {
   };
 
   const locations = extractMapLocationData(db);
+  const dynamicWorldObjects = extractDynamicWorldObjects(db);
 
-  return { ...player, locations };
+  return { ...player, locations, dynamicWorldObjects };
+}
+
+export function extractDynamicWorldObjects(db: Database) {
+  const worldObjects = db.exec(
+    `SELECT WorldObjectID, WorldObjectUID, XPos, YPos, ZPos FROM WorldObjectDynamic;`,
+  );
+
+  const { values } = worldObjects[0];
+  const data = values.map(
+    (item) =>
+      ({
+        id: item[1],
+        x: item[2],
+        y: item[3],
+        z: item[4],
+        nodeType: {
+          value: item[0],
+          title: item[0],
+          icon: '/assets/icons/dynamic.webp',
+        },
+      } as Node),
+  );
+  return data;
 }
 
 export function extractMapLocationData(db: Database) {
   const mapLocationData = db.exec(
     `SELECT MapLocationID, State FROM MapLocationDataDynamic;`,
   );
+
   const { values } = mapLocationData[0];
   const data = (values as [string, number][]).map((value) => [
     value[0].toUpperCase(),
@@ -232,4 +258,5 @@ export type SavefilePlayer = {
   lastName: string;
   year: number;
   locations: MapLocations;
+  dynamicWorldObjects: Node[];
 };

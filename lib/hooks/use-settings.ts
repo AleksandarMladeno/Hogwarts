@@ -3,10 +3,12 @@ import useSWR, { useSWRConfig } from 'swr';
 
 export type Settings = {
   hideDiscoveredNodes: boolean;
+  hideDynamicNodes: boolean;
 };
 
 export let cachedSettings: Settings = {
   hideDiscoveredNodes: false,
+  hideDynamicNodes: false,
 };
 
 try {

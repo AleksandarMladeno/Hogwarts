@@ -147,6 +147,22 @@ export default function OverwolfStatus({
           />
           <span>Hide discovered nodes</span>
         </label>
+        <p className="text-xs text-gray-500">
+          Not all nodes support discovering
+        </p>
+        <label className="text-sm flex items-center gap-1 ">
+          <input
+            type="checkbox"
+            checked={settings?.hideDynamicNodes ?? false}
+            onChange={(event) =>
+              setSettings({ hideDynamicNodes: event.target.checked })
+            }
+          />
+          <span>Hide dynamic nodes</span>
+        </label>
+        <p className="text-xs text-gray-500">
+          Dynamic nodes are only visible if a savegame is available
+        </p>
       </SidebarSection>
       <SidebarSection
         title={translations.realtimeStatus}

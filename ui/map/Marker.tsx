@@ -1,7 +1,6 @@
 'use client';
 import CanvasMarker from '#/lib/canvas-marker';
 import useDidUpdate from '#/lib/hooks/use-did-update';
-import { getNodeType } from '#/lib/node-types';
 import type { Node } from '#/lib/nodes';
 import { createNodeTooltip } from '#/lib/tooltips';
 import { useEffect, useState } from 'react';
@@ -11,14 +10,15 @@ export type MarkerProps = {
   node: Node;
   discovered?: boolean;
   selected?: boolean;
+  radius: number;
   onClick: () => void;
 };
 
-function Marker({ node, discovered, selected, onClick }: MarkerProps) {
+function Marker({ node, discovered, selected, radius, onClick }: MarkerProps) {
   const map = useMap();
   const [marker, setMarker] = useState<CanvasMarker | null>(null);
 
-  const nodeType = getNodeType(node.type);
+  const nodeType = node.nodeType;
   const src = (discovered && nodeType.discoveredIcon) || nodeType.icon;
   const latLng = [node.y, node.x] as [number, number];
 
@@ -28,7 +28,7 @@ function Marker({ node, discovered, selected, onClick }: MarkerProps) {
       return;
     }
     const marker = new CanvasMarker(latLng, {
-      radius: 15,
+      radius,
       src,
     });
     marker.addTo(map);

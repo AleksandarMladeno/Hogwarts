@@ -11,6 +11,9 @@ export default function MapLocationsProgress({
   return (
     <>
       <h5 className="font-semibold">Progress</h5>
+      <p className="text-xs text-gray-500">
+        Not all nodes support progress detection
+      </p>
       <p>
         Astronomy Altars:{' '}
         <span className="text-discovered">
@@ -40,7 +43,7 @@ export default function MapLocationsProgress({
         /{mapLocations.demiguiseStatues.max}
       </p>
       <p>
-        Enemies (Work in progress):{' '}
+        Enemies:{' '}
         <span className="text-discovered">
           {mapLocations.enemies.values.length}
         </span>

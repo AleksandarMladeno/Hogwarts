@@ -94,10 +94,21 @@ export default function Nodes({ lang }: { lang: string }) {
             node={node}
             discovered={discovered}
             selected={selectedNode?.id === node.id}
+            radius={15}
             onClick={() => setSelectedNode(node)}
           />
         );
       })}
+      {!settings?.hideDynamicNodes &&
+        player?.dynamicWorldObjects.map((node) => (
+          <Marker
+            key={node.id}
+            node={node}
+            radius={5}
+            selected={selectedNode?.id === node.id}
+            onClick={() => setSelectedNode(node)}
+          />
+        ))}
     </>
   );
 }
