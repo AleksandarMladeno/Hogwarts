@@ -5,9 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc && vite build && node copy-statics.mjs && ow opk pack dist -o dist/hogwarts.opk",
+    "build": "tsc && vite build && node copy-statics.mjs && ow opk pack dist -o hogwarts.opk",
     "preview": "vite preview",
-    "release": "ow opk upload dist/hogwarts.opk"
+    "release": "ow opk upload hogwarts.opk"
   },
   "devDependencies": {
     "@overwolf/ow-cli": "0.0.5-0",
