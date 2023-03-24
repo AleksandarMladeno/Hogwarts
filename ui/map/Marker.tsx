@@ -38,6 +38,7 @@ function Marker({ node, discovered, selected, radius, onClick }: MarkerProps) {
       // eslint-disable-next-line @typescript-eslint/ban-ts-comment
       // @ts-ignore
       event.originalEvent.propagatedFromMarker = true;
+      console.log(JSON.stringify({ ...node, discovered }));
       onClick();
     });
     return () => {
