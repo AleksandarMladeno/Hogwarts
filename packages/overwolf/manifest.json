@@ -61,28 +61,6 @@
         "allow_local_file_access": true,
         "popup_blocker": true,
         "mute": true
-      },
-      "authDiscord": {
-        "file": "auth-discord.html",
-        "debug_url": "http://localhost:3031/auth-discord.html",
-        "transparent": false,
-        "resizable": true,
-        "show_in_taskbar": true,
-        "size": {
-          "width": 640,
-          "height": 700
-        }
-      },
-      "authGitHub": {
-        "file": "auth-github.html",
-        "debug_url": "http://localhost:3031/auth-github.html",
-        "transparent": false,
-        "resizable": true,
-        "show_in_taskbar": true,
-        "size": {
-          "width": 640,
-          "height": 700
-        }
       }
     },
     "game_targeting": {

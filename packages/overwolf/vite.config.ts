@@ -8,8 +8,6 @@ export default defineConfig({
       input: {
         controller: 'controller.html',
         index: 'index.html',
-        authDiscord: 'auth-discord.html',
-        authGitHub: 'auth-github.html',
       },
     },
   },

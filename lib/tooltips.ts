@@ -1,4 +1,5 @@
 import type { Node } from './nodes';
+import { getNodeType } from './node-types';
 
 export const createNodeTooltip = (
   node: Pick<
@@ -8,11 +9,12 @@ export const createNodeTooltip = (
   discovered: boolean | null = null,
 ) => {
   let tooltip = '';
+  const nodeType = node.nodeType ?? getNodeType(node.type);
 
   if (node.title) {
     tooltip += `<p class="font-bold">${node.title}</p>`;
   }
-  tooltip += `<p class="text-brand-400">${node.nodeType.title}</p>`;
+  tooltip += `<p class="text-brand-400">${nodeType.title}</p>`;
   if (node.description) {
     tooltip += `<p class="whitespace-normal w-80">${node.description}</p>`;
   }

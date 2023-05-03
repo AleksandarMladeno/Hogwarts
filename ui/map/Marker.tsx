@@ -5,6 +5,7 @@ import type { Node } from '#/lib/nodes';
 import { createNodeTooltip } from '#/lib/tooltips';
 import { useEffect, useState } from 'react';
 import { useMap } from './Map';
+import { getNodeType } from '../../lib/node-types';
 
 export type MarkerProps = {
   node: Node;
@@ -18,7 +19,7 @@ function Marker({ node, discovered, selected, radius, onClick }: MarkerProps) {
   const map = useMap();
   const [marker, setMarker] = useState<CanvasMarker | null>(null);
 
-  const nodeType = node.nodeType;
+  const nodeType = node.nodeType ?? getNodeType(node.type);
   const src = (discovered && nodeType.discoveredIcon) || nodeType.icon;
   const latLng = [node.y, node.x] as [number, number];
 

@@ -5,6 +5,7 @@ import {
 import Image from 'next/image';
 import Button from '../Button';
 import SidebarSection from './SidebarSection';
+import { getNodeType } from '../../lib/node-types';
 
 export default function SelectedNode() {
   const { data: node } = useSelectedNode();
@@ -13,6 +14,8 @@ export default function SelectedNode() {
   if (!node) {
     return <></>;
   }
+
+  const nodeType = node.nodeType ?? getNodeType(node.type);
 
   return (
     <SidebarSection
@@ -35,7 +38,7 @@ export default function SelectedNode() {
         />
       )}
       {node.title && <p className="font-bold">{node.title}</p>}
-      <p className="text-brand-400">{node.nodeType.title}</p>
+      <p className="text-brand-400">{nodeType.title}</p>
       {node.description && (
         <p className="whitespace-normal text-sm">{node.description}</p>
       )}
