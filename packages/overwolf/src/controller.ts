@@ -1,10 +1,11 @@
 import { HOGWARTS_LEGACY_CLASS_ID } from './lib/config';
-import { getGameIsRunning } from './lib/games';
+import { getRunningGameInfo } from './lib/games';
 import { waitForOverwolf } from './lib/overwolf';
 import {
   closeMainWindow,
   closeWindow,
   getPreferedWindowName,
+  moveToOtherScreen,
   restoreWindow,
   toggleWindow,
   WINDOWS,
@@ -17,10 +18,14 @@ waitForOverwolf().then(() => {
 async function initController() {
   console.log('Init controller');
   const openApp = async () => {
-    const isGameRunning = await getGameIsRunning(HOGWARTS_LEGACY_CLASS_ID);
-    if (isGameRunning) {
+    const runningGameInfo = await getRunningGameInfo(HOGWARTS_LEGACY_CLASS_ID);
+
+    if (runningGameInfo) {
       const preferedWindowName = await getPreferedWindowName();
-      restoreWindow(preferedWindowName);
+      const windowId = await restoreWindow(preferedWindowName);
+      if (preferedWindowName === WINDOWS.DESKTOP) {
+        moveToOtherScreen(windowId, runningGameInfo.monitorHandle.value);
+      }
     } else {
       restoreWindow(WINDOWS.DESKTOP);
     }
