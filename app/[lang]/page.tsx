@@ -21,8 +21,8 @@ export async function generateMetadata({
   return {
     title: globalTranslations.map,
     alternates: {
-      canonical: getURL(`/${lang}/map/hogwarts`),
-      languages: getAlternates('/map/hogwarts'),
+      canonical: getURL(`/${lang}`),
+      languages: getAlternates(),
     },
   };
 }
