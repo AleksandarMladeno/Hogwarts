@@ -1,4 +1,4 @@
-import { getAlternates, loadDictionary } from '#/lib/i18n/settings';
+import { getAlternates } from '#/lib/i18n/settings';
 import { getURL } from '#/lib/utils';
 import type { Metadata } from 'next';
 import Script from 'next/script';
@@ -8,9 +8,8 @@ export async function generateMetadata({
 }: {
   params: { lang: string };
 }): Promise<Metadata> {
-  const { auth: authTranslations } = await loadDictionary(lang);
   return {
-    title: authTranslations.privacyPolicy,
+    title: 'Privacy Policy',
     alternates: {
       canonical: getURL(`/${lang}/privacy-policy`),
       languages: getAlternates('/privacy-policy'),
