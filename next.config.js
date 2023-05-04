@@ -20,6 +20,21 @@ const nextConfig = {
         destination: 'https://api.nitropay.com/v1/ads-1406.txt',
         permanent: true,
       },
+      {
+        source: '/:lang/map/hogwarts',
+        destination: '/:lang',
+        permanent: true,
+      },
+      {
+        source: '/:lang/blog',
+        destination: '/:lang',
+        permanent: true,
+      },
+      {
+        source: '/:lang/blog/:slug',
+        destination: '/:lang',
+        permanent: true,
+      },
     ];
   },
 };

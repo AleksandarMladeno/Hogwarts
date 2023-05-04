@@ -5,9 +5,9 @@ import AppLink from './AppLink';
 const GitHubLink = () => {
   return (
     <AppLink
-      href="https://github.com/lmachens/hogwarts.gg"
+      href="https://github.com/lmachens/hogwarts.th.gl"
       target="_blank"
-      className="border border-transparent hover:border-current rounded-lg px-4 py-2 transition"
+      className="border border-transparent hover:border-current rounded-lg px-4 py-2 transition self-center"
     >
       <Image src={gitHubLogo} alt="Contribute on GitHub" height={30} />
     </AppLink>

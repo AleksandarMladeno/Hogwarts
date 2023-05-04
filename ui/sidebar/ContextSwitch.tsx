@@ -1,6 +1,8 @@
 'use client';
 import type { Translations } from '#/lib/i18n/types';
 import dynamic from 'next/dynamic';
+import DiscordLink from '../DiscordLink';
+import GitHubLink from '../GitHubLink';
 
 const OverwolfStatus = dynamic(() => import('./OverwolfStatus'), {
   ssr: false,
@@ -30,6 +32,8 @@ export default function ContextSwitch({
         ) : (
           <WebsiteStatus translations={translations} />
         )}
+        <DiscordLink />
+        <GitHubLink />
       </div>
       {isOverwolfIframe ? (
         <div

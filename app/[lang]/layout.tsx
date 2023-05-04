@@ -1,4 +1,5 @@
 import { getAlternates, languages, loadDictionary } from '#/lib/i18n/settings';
+import { getNodes } from '#/lib/nodes';
 import { cn, getURL } from '#/lib/utils';
 import '#/styles/globals.css';
 import GlobalNav from '#/ui/GlobalNav';
@@ -97,6 +98,8 @@ const RootLayout = async ({
 }) => {
   const { global: globalTranslations, overwolf: overwolfTranslations } =
     await loadDictionary(lang);
+  const nodes = getNodes({ language: lang });
+
   return (
     <html
       lang={lang}
@@ -121,7 +124,7 @@ const RootLayout = async ({
           <div className="pt-14 w-[401px] h-full flex-col border-l border-gray-800 hidden md:flex">
             <ContextSwitch translations={overwolfTranslations} />
           </div>
-          <GlobalNav translations={globalTranslations} />
+          <GlobalNav translations={globalTranslations} nodes={nodes} />
         </div>
       </body>
     </html>

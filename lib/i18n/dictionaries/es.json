@@ -1,77 +1,4 @@
 {
-  "home": {
-    "subtitle": "Hogwarts Legacy Mapas y herramientas",
-    "articles": "Articles",
-    "viewBlog": "View Blog",
-    "hogwarts": "Hogwarts",
-    "viewMap": "View Map",
-    "community": "Community",
-    "joinDiscord": "Join Discord",
-    "openSource": "Open Source",
-    "openGitHub": "Open GitHub",
-    "lookingForContributors": "Estamos buscando autores, creadores de contenido, y contribuyentes.",
-    "pleaseJoinOur": "Por favor únete a nuestro:",
-    "openSourceNote": "¡Este proyecto es Código Abierto, contribuyentes son bienvenidos!"
-  },
-  "auth": {
-    "signIn": "Iniciar sesión",
-    "signUp": "Crea una cuenta nueva",
-    "discord": "Continuar con Discord",
-    "gitHub": "Continuar con GitHub",
-    "or": "o",
-    "awaitingConfirmation": "Esperando confirmación.",
-    "sentEmail": "Acabamos de enviar un correo electrónico aÑ",
-    "followLink": "Sigue el enlace o ingrese el codigo:",
-    "submit": "Ingrese",
-    "email": "Correo Electronico",
-    "noAccountAssociated": "No hay niguna cuenta asociada con este correo electronico.",
-    "signUpQuestion": "¿Inscribirse?",
-    "continueWithEmail": "Continuar con correo electronico",
-    "privacyPolicyMessage": "Al hacer clic en continuar, acepta la",
-    "privacyPolicy": "Política de privacidad",
-    "withoutAccount": "¿No tiene cuenta?",
-    "withAccount": "¿Tiene cuenta?",
-    "signInNow": "Iniciar sesión ahora",
-    "signUpNow": "Inscribirse ahora"
-  },
-  "blog": {
-    "title": "Blog",
-    "subtitle": "Las noticias mas recientes sobre Hogwarts Legacy y Hogwarts.gg"
-  },
-  "dashboard": {
-    "posts": "Publicaciones",
-    "writtenBy": "Escrito por",
-    "noPosts": "No se han creado publicaciones",
-    "create": "Crear",
-    "back": "De vuelta",
-    "published": "Publicado",
-    "draft": "Borrador",
-    "delete": "Borrar esta publicacion",
-    "save": "Guardar",
-    "title": "Titulo",
-    "short": "Corto",
-    "full": "Lleno",
-    "dangerZone": "Region de peligro",
-    "showOnMap": "Mostrar en mapa"
-  },
-  "posts": {
-    "writtenBy": "Escrito por",
-    "readMore": "Leer más"
-  },
-  "post": {
-    "writtenBy": "Escrito por",
-    "backToBlog": "De vuelta al blog",
-    "aboutTheAuthor": "Sobre el autor",
-    "commentSubmit": "Ingresar",
-    "commentDeleteConfirmation": "¿Estas seguro que quires borrar este comentario?"
-  },
-  "user": {
-    "editProfile": "Editar Perfil",
-    "username": "Usario",
-    "description": "Descripción",
-    "submit": "Ingresar",
-    "cancel": "Cancelar"
-  },
   "global": {
     "blog": "Blog",
     "map": "Mapa",
@@ -82,7 +9,7 @@
     "posts": "Publicaciones",
     "logOut": "Cerrar sesión",
     "signIn": "Iniciar sesión",
-    "copyright": "Derechos de autor © 2023 hogwarts.gg. El contenido del juego y los activos son marcas comerciales de Warner Bros. Entertainment Inc.",
+    "copyright": "Derechos de autor © 2023 hogwarts.th.gl. El contenido del juego y los activos son marcas comerciales de Warner Bros. Entertainment Inc.",
     "quickSearch": "Búsqueda rápida",
     "quickSearchTooltip": "Buscar nodos y publicaciones"
   },

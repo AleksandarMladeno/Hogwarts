@@ -1,96 +1,47 @@
-import { loadDictionary } from '#/lib/i18n/settings';
-import AppLink from '#/ui/AppLink';
-import DiscordLink from '#/ui/DiscordLink';
-import Footer from '#/ui/Footer';
-import GitHubLink from '#/ui/GitHubLink';
-import Hero from '#/ui/Hero';
-import { IconArticle, IconMap } from '@tabler/icons-react';
-import Image from 'next/image';
-import discordLogo from '../../public/assets/discord.svg';
-import githubLogo from '../../public/assets/github.png';
+import { getAlternates, loadDictionary } from '#/lib/i18n/settings';
+import { getNodes } from '#/lib/nodes';
+import { getURL } from '#/lib/utils';
+import FixedBox from '#/ui/FixedBox';
+import HogwartsLevelSelect from '#/ui/map/HogwartsLevelSelect';
+import Nodes from '#/ui/map/Nodes';
+import Player from '#/ui/map/Player';
+import type { Metadata } from 'next';
+import nextDynamic from 'next/dynamic';
+const HogwartsMap = nextDynamic(() => import('#/ui/map/HogwartsMap'), {
+  ssr: false,
+});
+
+export async function generateMetadata({
+  params: { lang },
+}: {
+  params: { lang: string };
+}): Promise<Metadata> {
+  const { global: globalTranslations } = await loadDictionary(lang);
+
+  return {
+    title: globalTranslations.map,
+    alternates: {
+      canonical: getURL(`/${lang}/map/hogwarts`),
+      languages: getAlternates('/map/hogwarts'),
+    },
+  };
+}
 
 export default async function Page({
   params: { lang },
 }: {
   params: { lang: string };
 }) {
-  const { home: translations, global: globalTranslations } =
-    await loadDictionary(lang);
-
+  const nodes = getNodes({ language: lang });
   return (
-    <>
-      <Hero title="Hogwart$.gg" subtitle={translations.subtitle} />
-      <div className="flex flex-col items-center gap-4 text-center">
-        <section className="flex gap-4 flex-wrap justify-center">
-          <Card
-            title={translations.articles}
-            icon={<IconArticle size={72} stroke={1.5} />}
-            href="/blog"
-          >
-            {translations.viewBlog}
-          </Card>
-          <Card
-            title={translations.hogwarts}
-            icon={<IconMap size={72} stroke={1.5} />}
-            href="/map/hogwarts"
-          >
-            {translations.viewMap}
-          </Card>
-          <Card
-            title={translations.community}
-            icon={<Image src={discordLogo} alt="" height={48} />}
-            href="https://discord.gg/NTZu8Px"
-            target="_blank"
-          >
-            {translations.joinDiscord}
-          </Card>
-          <Card
-            title={translations.openSource}
-            icon={<Image src={githubLogo} alt="" height={48} />}
-            href="https://github.com/lmachens/hogwarts.gg"
-            target="_blank"
-          >
-            {translations.openGitHub}
-          </Card>
-        </section>
-        <p>
-          {translations.lookingForContributors}
-          <br />
-          {translations.pleaseJoinOur}
-        </p>
-        <DiscordLink />
-        <p>{translations.openSourceNote}</p>
-        <GitHubLink />
-      </div>
-      <Footer translations={globalTranslations} />
-    </>
-  );
-}
-
-function Card({
-  title,
-  icon,
-  children,
-  href,
-  target,
-}: {
-  title: string;
-  icon: React.ReactNode;
-  children: React.ReactNode;
-  href: string;
-  target?: string;
-}) {
-  return (
-    <AppLink
-      href={href}
-      className="flex items-center rounded p-4 bg-gray-900 hover:scale-125 transition gap-4 text-left"
-      target={target}
-    >
-      {icon}
-      <div className="space-y-1">
-        <h3 className="text-lg">{title}</h3>
-        <p className="text-brand-400">{children}</p>
-      </div>
-    </AppLink>
+    <div className="h-full-height w-full relative">
+      <HogwartsMap>
+        <FixedBox className="left-4 bottom-0 flex justify-center space-x-2">
+          <HogwartsLevelSelect />
+          <Player />
+        </FixedBox>
+        <Nodes nodes={nodes} />
+      </HogwartsMap>
+    </div>
   );
 }

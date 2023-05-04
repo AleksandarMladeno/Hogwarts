@@ -1,4 +1,4 @@
-import { getAlternates, loadDictionary } from '#/lib/i18n/settings';
+import { getAlternates } from '#/lib/i18n/settings';
 import { getURL } from '#/lib/utils';
 import type { Metadata } from 'next';
 import Script from 'next/script';
@@ -8,9 +8,8 @@ export async function generateMetadata({
 }: {
   params: { lang: string };
 }): Promise<Metadata> {
-  const { auth: authTranslations } = await loadDictionary(lang);
   return {
-    title: authTranslations.privacyPolicy,
+    title: 'Privacy Policy',
     alternates: {
       canonical: getURL(`/${lang}/privacy-policy`),
       languages: getAlternates('/privacy-policy'),
@@ -29,7 +28,7 @@ export default function Page() {
       <div className="px-8 py-12 space-y-2">
         <h2 className="text-xl">Details</h2>
         <p>
-          At Hogwarts.gg, accessible from https://www.hogwarts.gg, one of our
+          At Hogwarts.gg, accessible from https://www.hogwarts.th.gl, one of our
           main priorities is the privacy of our visitors. This Privacy Policy
           document contains types of information that is collected and recorded
           by Hogwarts.gg and how we use it.

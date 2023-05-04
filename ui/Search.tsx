@@ -1,25 +1,22 @@
 import useDidUpdate from '#/lib/hooks/use-did-update';
-import useLanguage from '#/lib/hooks/use-language';
-import { useNodes } from '#/lib/hooks/use-nodes';
-import { usePosts } from '#/lib/hooks/use-posts';
 import { useSetSelectedNode } from '#/lib/hooks/use-selected-node';
-import { labels } from '#/lib/i18n/settings';
 import type { Translations } from '#/lib/i18n/types';
 import type { Node } from '#/lib/nodes';
-import type { Post } from '#/lib/posts';
-import { IconArticle, IconSearch } from '@tabler/icons-react';
-import { format } from 'date-fns';
+import { IconSearch } from '@tabler/icons-react';
 import Image from 'next/image';
 import { memo, useCallback, useMemo, useState } from 'react';
 import AppLink from './AppLink';
 import Button from './Button';
 import Dialog from './Dialog';
 import Divider from './Divider';
+import { getNodeType } from '../lib/node-types';
 
 export default function Search({
   translations,
+  nodes,
 }: {
   translations: Translations;
+  nodes: Node[];
 }) {
   const [value, setValue] = useState('');
   const [open, setOpen] = useState(false);
@@ -55,47 +52,25 @@ export default function Search({
         />
       </label>
       <Divider />
-      <SearchResults search={search} onClick={close} />
+      <SearchResults search={search} nodes={nodes} onClick={close} />
     </Dialog>
   );
 }
 
 const SearchResults = memo(function SearchResults({
   search,
+  nodes,
   onClick,
 }: {
   search: string;
+  nodes: Node[];
   onClick: () => void;
 }) {
-  const language = useLanguage();
-  const { data: posts = [] } = usePosts({ language, published: true });
-  const { data: nodes = [] } = useNodes({ language });
   const regExp = useMemo(
     () => (search ? new RegExp(search, 'i') : null),
     [search],
   );
   const setNode = useSetSelectedNode();
-
-  const filteredPosts = useMemo(() => {
-    const result: Post[] = [];
-    for (const post of posts) {
-      if (result.length >= 5) {
-        break;
-      }
-      if (regExp) {
-        if (
-          post.title!.match(regExp) ||
-          post.short!.match(regExp) ||
-          post.body!.match(regExp)
-        ) {
-          result.push(post);
-        }
-      } else {
-        result.push(post);
-      }
-    }
-    return result;
-  }, [posts, regExp]);
 
   const filteredNodes = useMemo(() => {
     const result: Node[] = [];
@@ -126,56 +101,23 @@ const SearchResults = memo(function SearchResults({
           </li>
         );
       })}
-      {filteredPosts.map((post) => (
-        <li key={post.id} onClick={onClick}>
-          <PostResult post={post} />
-        </li>
-      ))}
-      {filteredNodes.length === 0 && filteredPosts.length === 0 && (
-        <li className="p-2">No results</li>
-      )}
+
+      {filteredNodes.length === 0 && <li className="p-2">No results</li>}
     </ul>
   );
 });
 
-function PostResult({ post }: { post: Post }) {
-  return (
-    <AppLink
-      className="p-2 flex gap-4 items-center hover:bg-gray-600"
-      href={`/blog/${post.slug}`}
-    >
-      <IconArticle width={50} height={50} className="shrink-0" />
-      <div>
-        <p className="font-semibold">{post.title}</p>
-        <div className="flex gap-2 text-gray-400 text-sm">
-          <p>{labels[post.language]}</p>|
-          <p>
-            <span className="font-semibold">{post.user.username}</span> {' - '}
-            {post.published_at && (
-              <time dateTime={post.published_at}>
-                {format(new Date(post.published_at), 'MMMM dd, yyyy')}
-              </time>
-            )}
-          </p>
-        </div>
-        <p
-          dangerouslySetInnerHTML={{ __html: post.short! }}
-          className="text-sm"
-        />
-      </div>
-    </AppLink>
-  );
-}
-
 function NodeResult({ node, onClick }: { node: Node; onClick: () => void }) {
+  const nodeType = node.nodeType ?? getNodeType(node.type);
+
   return (
     <AppLink
       className="p-2 flex gap-4 items-center hover:bg-gray-600"
-      href={`/map/hogwarts`}
+      href={`/`}
       onClick={onClick}
     >
       <Image
-        src={node.nodeType.icon}
+        src={nodeType.icon}
         alt=""
         width={50}
         height={50}
@@ -183,8 +125,8 @@ function NodeResult({ node, onClick }: { node: Node; onClick: () => void }) {
         loading="lazy"
       />
       <div>
-        <p className="font-semibold">{node.title || node.nodeType.title}</p>
-        <p className="text-brand-400 text-sm">{node.nodeType.title}</p>
+        <p className="font-semibold">{node.title || nodeType.title}</p>
+        <p className="text-brand-400 text-sm">{nodeType.title}</p>
         <p className="capitalize text-gray-200 text-sm">
           {node.world}
           {node.level && ` Level ${node.level}`}

@@ -1,6 +1,5 @@
 'use client';
 
-import { useNodes } from '#/lib/hooks/use-nodes';
 import { useSavegamePlayer } from '#/lib/hooks/use-savegame-player';
 import {
   useSelectedNode,
@@ -14,8 +13,7 @@ import { Fragment } from 'react';
 import Marker from './Marker';
 import Text from './Text';
 
-export default function Nodes({ lang }: { lang: string }) {
-  const { data: nodes = [] } = useNodes({ language: lang });
+export default function Nodes({ nodes }: { nodes: Node[] }) {
   const { data: player } = useSavegamePlayer();
   const mapStore = useMapStore();
   const { data: settings } = useSettings();

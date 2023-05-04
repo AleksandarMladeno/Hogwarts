@@ -3,9 +3,10 @@ import type { Dictionary } from './types';
 
 export const fallbackLang = 'en';
 export const languages = [fallbackLang, 'de', 'fr', 'es', 'ru'];
-export const loadDictionary = (language: string) => {
+export const loadDictionary = async (language: string) => {
   const lang = languages.includes(language) ? language : fallbackLang;
-  return import(`#/lib/i18n/dictionaries/${lang}.json`) as Promise<Dictionary>;
+  const result = await import(`#/lib/i18n/dictionaries/${lang}.json`);
+  return (result.default ?? result) as Promise<Dictionary>;
 };
 export const labels: {
   [language: string]: string;

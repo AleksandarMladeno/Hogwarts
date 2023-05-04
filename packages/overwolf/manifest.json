@@ -4,7 +4,7 @@
   "meta": {
     "name": "Hogwarts.gg-DEV",
     "author": "Leon Machens",
-    "version": "0.5.3",
+    "version": "0.6.0",
     "minimum-overwolf-version": "0.218.0",
     "description": "Hogwarts Legacy Map and Tools",
     "dock_button_title": "Hogwarts.gg",
@@ -61,28 +61,6 @@
         "allow_local_file_access": true,
         "popup_blocker": true,
         "mute": true
-      },
-      "authDiscord": {
-        "file": "auth-discord.html",
-        "debug_url": "http://localhost:3031/auth-discord.html",
-        "transparent": false,
-        "resizable": true,
-        "show_in_taskbar": true,
-        "size": {
-          "width": 640,
-          "height": 700
-        }
-      },
-      "authGitHub": {
-        "file": "auth-github.html",
-        "debug_url": "http://localhost:3031/auth-github.html",
-        "transparent": false,
-        "resizable": true,
-        "show_in_taskbar": true,
-        "size": {
-          "width": 640,
-          "height": 700
-        }
       }
     },
     "game_targeting": {
@@ -116,7 +94,7 @@
       "googlesyndication": "http"
     },
     "externally_connectable": {
-      "matches": ["http://localhost:3031", "https://www.hogwarts.gg"]
+      "matches": ["http://localhost:3031", "https://www.hogwarts.th.gl"]
     },
     "force_browser": "user",
     "developer": {
