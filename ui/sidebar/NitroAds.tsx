@@ -30,7 +30,7 @@ window.nitroAds = window.nitroAds || {
 
 export default function NitroAds() {
   function createAd() {
-    window['nitroAds'].createAd('nitro-video', {
+    window['nitroAds'].createAd('hogwarts-video-nc', {
       format: 'video-nc',
       video: {},
     });
@@ -41,24 +41,24 @@ export default function NitroAds() {
   if (isMd.matches) {
     return (
       <>
-        <div id="nitro-video" />
+        <div id="hogwarts-video-nc" />
         <Script
           onReady={createAd}
           data-cfasync="false"
           async
-          src="https://s.nitropay.com/ads-1406.js"
+          src="https://s.nitropay.com/ads-1487.js"
         />
       </>
     );
   }
   return createPortal(
     <>
-      <div id="nitro-video" className="mt-2" />
+      <div id="hogwarts-video-nc" className="mt-2" />
       <Script
         onReady={createAd}
         data-cfasync="false"
         async
-        src="https://s.nitropay.com/ads-1406.js"
+        src="https://s.nitropay.com/ads-1487.js"
       />
     </>,
     document.querySelector('#nitro-floating')!,
