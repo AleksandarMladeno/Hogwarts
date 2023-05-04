@@ -7,7 +7,6 @@ import { loadHLHookPlugin } from './plugins';
 import { setLastIFramePathname } from './storage';
 import {
   getPreferedWindowName,
-  restoreWindow,
   togglePreferedWindow,
   WINDOWS,
 } from './windows';
@@ -90,24 +89,6 @@ export async function communicate(
     });
   }
 
-  function listToAuthWindowClose(
-    event: overwolf.windows.WindowStateChangedEvent,
-  ) {
-    if (
-      [WINDOWS.AUTH_DISCORD, WINDOWS.AUTH_GITHUB].includes(event.window_name) &&
-      event.window_state_ex === 'closed'
-    ) {
-      // Tell iframe, that the login could be successful
-      postMessage(
-        {
-          type: 'authorized',
-        },
-        '*',
-      );
-      overwolf.windows.onStateChanged.removeListener(listToAuthWindowClose);
-    }
-  }
-
   window.addEventListener('message', (message) => {
     const data = message.data as unknown;
     if (
@@ -139,14 +120,6 @@ export async function communicate(
         togglePreferedWindow().then(() => {
           refreshPreferedWindowName();
         });
-        break;
-      case 'discord':
-        restoreWindow(WINDOWS.AUTH_DISCORD);
-        overwolf.windows.onStateChanged.addListener(listToAuthWindowClose);
-        break;
-      case 'github':
-        restoreWindow(WINDOWS.AUTH_GITHUB);
-        overwolf.windows.onStateChanged.addListener(listToAuthWindowClose);
         break;
     }
   });
