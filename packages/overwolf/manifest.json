@@ -94,7 +94,7 @@
       "googlesyndication": "http"
     },
     "externally_connectable": {
-      "matches": ["http://localhost:3031", "https://www.hogwarts.gg"]
+      "matches": ["http://localhost:3031", "https://www.hogwarts.th.gl"]
     },
     "force_browser": "user",
     "developer": {

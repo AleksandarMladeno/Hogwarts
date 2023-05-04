@@ -1,6 +1,6 @@
 # Hogwarts.gg
 
-[Hogwarts.gg](https://www.hogwarts.gg) is a Hogwarts Legacy fansite with an interactive map, blog and tools.
+[Hogwarts.gg](https://www.hogwarts.th.gl) is a Hogwarts Legacy fansite with an interactive map, blog and tools.
 
 ![](/assets/social.jpg)
 
