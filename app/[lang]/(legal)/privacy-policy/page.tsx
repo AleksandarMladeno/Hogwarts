@@ -28,7 +28,7 @@ export default function Page() {
       <div className="px-8 py-12 space-y-2">
         <h2 className="text-xl">Details</h2>
         <p>
-          At Hogwarts.gg, accessible from https://www.hogwarts.th.gl, one of our
+          At Hogwarts.gg, accessible from https://hogwarts.th.gl, one of our
           main priorities is the privacy of our visitors. This Privacy Policy
           document contains types of information that is collected and recorded
           by Hogwarts.gg and how we use it.

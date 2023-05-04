@@ -1,7 +1,7 @@
 import { getLastIFramePathname } from './lib/storage';
 
 export const BASE_URL =
-  import.meta.env.VITE_APP_WEB || 'https://www.hogwarts.th.gl';
+  import.meta.env.VITE_APP_WEB || 'https://hogwarts.th.gl';
 export const DEFAULT_URL = BASE_URL + '/en/map/hogwarts';
 export default function IFrame() {
   const iframe = document.querySelector<HTMLIFrameElement>('.iframe')!;
