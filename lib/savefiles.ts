@@ -26,10 +26,13 @@ export async function extractDatabase(file: File) {
   const formData = new FormData();
   formData.append('file', file);
 
-  const response = await fetch('/api/save-file', {
-    method: 'POST',
-    body: formData,
-  });
+  const response = await fetch(
+    'https://hogwarts-legacy-api.th.gl/getRawDatabaseImage',
+    {
+      method: 'POST',
+      body: formData,
+    },
+  );
   const buffer = await response.arrayBuffer();
   return new Uint8Array(buffer);
 }

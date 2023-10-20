@@ -37,14 +37,6 @@ const nextConfig = {
       },
     ];
   },
-  async rewrites() {
-    return [
-      {
-        source: '/api/save-file',
-        destination: 'https://hogwarts-legacy-api.th.gl/getRawDatabaseImage',
-      },
-    ];
-  },
 };
 
 module.exports = nextConfig;
