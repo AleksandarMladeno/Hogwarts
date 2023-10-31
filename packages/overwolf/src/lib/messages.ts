@@ -1,3 +1,4 @@
+import { useAccountStore } from './account';
 import { HOGWARTS_LEGACY_CLASS_ID } from './config';
 import { listenToGameInfo, listenToOverlayEnablement } from './games';
 import { listenToHotkeyBinding } from './hotkeys';
@@ -51,6 +52,11 @@ const realtime: MESSAGE_REALTIME = {
   position: null,
 };
 
+export type MESSAGE_IS_PATRON = {
+  type: 'isPatron';
+  value: boolean;
+};
+
 export async function communicate(
   iframe: HTMLIFrameElement,
   callback: () => void,
@@ -101,9 +107,32 @@ export async function communicate(
     }
     switch (data.type) {
       case 'status':
-        postStatus();
-        postMessage(realtime, '*');
-        callback();
+        {
+          postStatus();
+          postMessage(realtime, '*');
+          let isPatron = useAccountStore.getState().isPatron;
+          postMessage(
+            {
+              type: 'isPatron',
+              value: isPatron,
+            },
+            '*',
+          );
+
+          useAccountStore.subscribe((state) => {
+            if (isPatron !== state.isPatron && state.isPatron) {
+              isPatron = state.isPatron;
+              postMessage(
+                {
+                  type: 'isPatron',
+                  value: isPatron,
+                },
+                '*',
+              );
+            }
+          });
+          callback();
+        }
         break;
       case 'hotkey_binding':
         location.href = `overwolf://settings/games-overlay?hotkey=toggle_app&gameId=${HOGWARTS_LEGACY_CLASS_ID}`;

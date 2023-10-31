@@ -1,5 +1,9 @@
 lockfileVersion: '6.0'
 
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false
+
 dependencies:
   '@radix-ui/react-dialog':
     specifier: 1.0.3
@@ -22,6 +26,9 @@ dependencies:
   date-fns:
     specifier: 2.30.0
     version: 2.30.0
+  js-cookie:
+    specifier: 3.0.5
+    version: 3.0.5
   leaflet:
     specifier: 1.9.3
     version: 1.9.3
@@ -54,6 +61,9 @@ devDependencies:
   '@overwolf/types':
     specifier: 3.23.1
     version: 3.23.1
+  '@types/js-cookie':
+    specifier: 3.0.5
+    version: 3.0.5
   '@types/leaflet':
     specifier: 1.9.3
     version: 1.9.3
@@ -904,6 +914,13 @@ packages:
     resolution:
       {
         integrity: sha512-Nmh0K3iWQJzniTuPRcJn5hxXkfB1T1pgB89SBig5PlJQU5yocazeu4jATJlaA0GYFKWMqDdvYemoSnF2pXgLVA==,
+      }
+    dev: true
+
+  /@types/js-cookie@3.0.5:
+    resolution:
+      {
+        integrity: sha512-dtLshqoiGRDHbHueIT9sjkd2F4tW1qPSX2xKAQK8p1e6pM+Z913GM1shv7dOqqasEMYbC5zEaClJomQe8OtQLA==,
       }
     dev: true
 
@@ -2961,6 +2978,14 @@ packages:
       }
     hasBin: true
     dev: true
+
+  /js-cookie@3.0.5:
+    resolution:
+      {
+        integrity: sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==,
+      }
+    engines: { node: '>=14' }
+    dev: false
 
   /js-sdsl@4.2.0:
     resolution:

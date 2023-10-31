@@ -1,5 +1,8 @@
 'use client';
+import { useAccountStore } from '#/lib/store/account';
+import Cookies from 'js-cookie';
 import Script from 'next/script';
+import { useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
 type NitroAds = {
@@ -29,6 +32,55 @@ window.nitroAds = window.nitroAds || {
 };
 
 export default function NitroAds() {
+  const accountStore = useAccountStore();
+
+  useEffect(() => {
+    let userId = Cookies.get('userId');
+    const refreshState = async () => {
+      if (!userId) {
+        const state = useAccountStore.getState();
+        if (state.isPatron) {
+          accountStore.setIsPatron(false);
+        }
+        return;
+      }
+
+      const response = await fetch(
+        `https://www.th.gl/api/patreon?appId=ejpjngplofkhhplmlfdhlaccobehhefmgbbojdno`,
+        { credentials: 'include' },
+      );
+      try {
+        const body = await response.json();
+        if (!response.ok) {
+          console.warn(body);
+          accountStore.setIsPatron(false);
+        } else {
+          console.log(`Patreon successfully activated`);
+          accountStore.setIsPatron(true, userId);
+        }
+      } catch (err) {
+        console.error(err);
+        accountStore.setIsPatron(false);
+      }
+    };
+    refreshState();
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === 'visible') {
+        const newUserId = Cookies.get('userId');
+        if (newUserId !== userId) {
+          userId = newUserId;
+          refreshState();
+        }
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    return () => {
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, []);
+
   function createAd() {
     window['nitroAds'].createAd('hogwarts-video-nc', {
       format: 'video-nc',
@@ -37,6 +89,10 @@ export default function NitroAds() {
   }
 
   const isMd = window.matchMedia('(min-width: 768px)');
+
+  if (accountStore.isPatron) {
+    return <></>;
+  }
 
   if (isMd.matches) {
     return (

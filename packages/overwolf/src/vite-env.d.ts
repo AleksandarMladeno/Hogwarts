@@ -3,6 +3,7 @@
 
 interface ImportMetaEnv {
   readonly VITE_APP_WEB: string;
+  readonly VITE_PATREON_BASE_URI: string;
   // more env variables...
 }
 

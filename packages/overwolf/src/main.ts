@@ -73,8 +73,7 @@ waitForOverwolf().then(async () => {
     clearTimeout(timeoutId);
     loading.remove();
     error.style.display = 'none';
-    const ads = Ads();
-    document.body.append(ads);
+    Ads();
   });
 
   initResizeBorders();

@@ -1,5 +1,6 @@
 'use client';
 import type { Translations } from '#/lib/i18n/types';
+import { useAccountStore } from '#/lib/store/account';
 import dynamic from 'next/dynamic';
 import DiscordLink from '../DiscordLink';
 import GitHubLink from '../GitHubLink';
@@ -21,6 +22,8 @@ export default function ContextSwitch({
 }: {
   translations: Translations;
 }) {
+  const accountStore = useAccountStore();
+
   const isOverwolfIframe =
     window.top && navigator.userAgent.includes('OverwolfClient');
 
@@ -35,12 +38,24 @@ export default function ContextSwitch({
         <DiscordLink />
         <GitHubLink />
       </div>
-      {isOverwolfIframe ? (
-        <div
-          className={`w-[400px] h-[300px] bg-gray-900 bg-[url('/assets/ads-bg.jpg')] bg-cover bg-center bg-no-repeat grayscale brightness-75 `}
-        />
-      ) : (
-        <NitroAds />
+      {!accountStore.isPatron && (
+        <>
+          <a
+            href="https://www.th.gl/support-me"
+            target="_blank"
+            className="text-center"
+            data-i18n
+          >
+            Get rid of ads and support me on Patreon
+          </a>
+          {isOverwolfIframe ? (
+            <div
+              className={`w-[400px] h-[300px] bg-gray-900 bg-[url('/assets/ads-bg.jpg')] bg-cover bg-center bg-no-repeat grayscale brightness-75 `}
+            />
+          ) : (
+            <NitroAds />
+          )}
+        </>
       )}
     </>
   );

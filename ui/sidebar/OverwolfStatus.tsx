@@ -5,6 +5,7 @@ import { useSetSettings, useSettings } from '#/lib/hooks/use-settings';
 import type { Translations } from '#/lib/i18n/types';
 import { postMessage } from '#/lib/messages';
 import { bodyToFile } from '#/lib/savefiles';
+import { useAccountStore } from '#/lib/store/account';
 import { cn } from '#/lib/utils';
 import { usePathname, useSearchParams } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -41,6 +42,11 @@ export type MESSAGE_REALTIME = {
   } | null;
 };
 
+export type MESSAGE_IS_PATRON = {
+  type: 'isPatron';
+  value: boolean;
+};
+
 export default function OverwolfStatus({
   translations,
 }: {
@@ -52,7 +58,7 @@ export default function OverwolfStatus({
   const searchParams = useSearchParams()!;
   const setPlayerPosition = useSetPlayerPosition();
   const { mutate } = useSWRConfig();
-
+  const accountStore = useAccountStore();
   const { data: settings } = useSettings();
   const setSettings = useSetSettings();
   const [savegame, setSavegame] = useState<File | null>(null);
@@ -101,6 +107,12 @@ export default function OverwolfStatus({
         case 'authorized':
           {
             mutate('me');
+          }
+          break;
+        case 'isPatron':
+          {
+            const patron = data as MESSAGE_IS_PATRON;
+            accountStore.setIsPatron(patron.value);
           }
           break;
       }
