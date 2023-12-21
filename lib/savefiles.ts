@@ -15,7 +15,8 @@ export async function readSavegame(file: File) {
   const SQL = await initSqlJs({
     // Required to load the wasm binary asynchronously. Of course, you can host it wherever you want
     // You can omit locateFile completely when running in node
-    locateFile: (file) => `https://sql.js.org/dist/${file}`,
+    locateFile: (file) =>
+      `https://cdnjs.cloudflare.com/ajax/libs/sql.js/1.8.0/${file}`,
   });
   const db = await new SQL.Database(rawdb);
   const player = extractPlayer(db);
